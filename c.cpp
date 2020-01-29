@@ -2,6 +2,8 @@
 
 using namespace std;
 
+typedef long long int lli;
+
 int is_prime (int n) { // Verifica se um numero e primo
     if (n == 0 || n == 1) return 0;
     for (int i = 2; i <= sqrt(n); i++) {
@@ -39,6 +41,19 @@ int read_prime() {
         }
     } while (flag);
     return n;
+}
+
+// Exponenciação modular rápida
+lli exponetiation (lli base, lli exp, lli mod) {
+    lli r = 1;
+    while (exp) {
+        if (exp & 1) {
+            r = (r * base) % mod;
+        }
+        base = (base * base) % mod;
+        exp = exp >> 1;
+    }
+    return r;
 }
 
 void generate_key() {
@@ -82,23 +97,18 @@ void encript () {
 
     FILE *crip = fopen("cript.txt", "w");
     for (int i = 0; i < texto.size(); i++) {
+        lli base;
         if (texto[i] == ' ') {
-            unsigned long long int x = 28;
-            for(int j = 0; j < e; j++) {
-                x *= 28;
-            }
-            fprintf(crip, "%lld ", x % n);
+            base = 28;
         } else {
-            int h = texto[i] - 63;
-            printf ("%c = %d\n", texto[i], h);
-            unsigned long long int x = h;
-            for(int j = 1; j < e; j++) {
-                printf("x = %lld\n", x);
-                x *= h;
-            }
-            printf ("x = %lld\n", x);
-            fprintf(crip, "%lld ", x % n);
+            base = texto[i] - 63;
         }
+        printf ("%c = %lld\n", texto[i], base);
+
+        lli x = exponetiation(base, e, n);
+        
+        printf ("x = %lld\n", x);
+        fprintf(crip, "%lld ", x);
     }
 }
 
@@ -112,20 +122,30 @@ void desencript() {
 
     printf ("Escolha um número para o expoente: \n");
     scanf ("%d", &d);
-    int x = (p - 1) * (q - 1);
-    int e = expoentes(d, x);
     int n = p * q;
 
     printf("Insira o arquivo com a mensagem criptografada: ");
     char file[250];
     scanf("%s", file); 
 
-    FILE *archive = fopen(file, "w");
+    FILE *archive = fopen(file, "r");
     if (archive == NULL) {
         cout << "Arquivo não encontrado!\n";
     }
 
-    
+    FILE *desencript = fopen("desencript.txt", "w");
+
+    lli num;
+    while(fscanf(archive, "%lld", &num) != EOF) {
+        lli result = exponetiation(num, d, n);
+        char caracter;
+        if (result == 28) {
+            caracter = ' ';
+        } else {
+            caracter = result + 63;
+        }
+        fprintf(desencript, "%c", caracter);
+    }
 }
 
 int main() {
