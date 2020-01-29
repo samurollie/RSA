@@ -47,11 +47,11 @@ int read_prime() {
 lli exponetiation (lli base, lli exp, lli mod) {
     lli r = 1;
     while (exp) {
-        if (exp & 1) {
+        if (exp & 1) { // Se o bit 1 estiver setado
             r = (r * base) % mod;
         }
         base = (base * base) % mod;
-        exp = exp >> 1;
+        exp = exp >> 1; //Desloca pra direita, dividindo por 2;
     }
     return r;
 }
@@ -150,8 +150,10 @@ void desencript() {
 
 int main() {
     int op;
+    printf("--------------| SISTEMA DE CRIPTOGRAFIA RSA |--------------\n");
     printf ("Selecione uma opção:\n");
     printf ("(1) - Gerar a chave\n(2) - Encriptar\n(3) - Desencriptar\n");
+    printf("-----------------------------------------------------------\n");
     scanf("%d", &op);
     switch (op) {
         case 1:
