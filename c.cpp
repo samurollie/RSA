@@ -102,10 +102,36 @@ void encript () {
     }
 }
 
+void desencript() {
+    int p, q, d;
+    printf("Digite um número primo: ");
+    p = read_prime();
+
+    printf("Digite outro número primo: ");
+    q = read_prime();
+
+    printf ("Escolha um número para o expoente: \n");
+    scanf ("%d", &d);
+    int x = (p - 1) * (q - 1);
+    int e = expoentes(d, x);
+    int n = p * q;
+
+    printf("Insira o arquivo com a mensagem criptografada: ");
+    char file[250];
+    scanf("%s", file); 
+
+    FILE *archive = fopen(file, "w");
+    if (archive == NULL) {
+        cout << "Arquivo não encontrado!\n";
+    }
+
+    
+}
+
 int main() {
     int op;
     printf ("Selecione uma opção:\n");
-    printf ("(1) - Gerar a chave\n(2) - Encriptar\n(3) - Desencriptar\n(4) - Sair\n");
+    printf ("(1) - Gerar a chave\n(2) - Encriptar\n(3) - Desencriptar\n");
     scanf("%d", &op);
     switch (op) {
         case 1:
@@ -117,7 +143,7 @@ int main() {
             break;
 
         case 3:
-            // desencript();
+            desencript();
             break;
     }
 }
