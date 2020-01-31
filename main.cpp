@@ -149,23 +149,44 @@ void desencript() {
 }
 
 int main() {
-    int op;
-    printf("--------------| SISTEMA DE CRIPTOGRAFIA RSA |--------------\n");
-    printf ("Selecione uma opção:\n");
-    printf ("(1) - Gerar a chave\n(2) - Encriptar\n(3) - Desencriptar\n");
-    printf("-----------------------------------------------------------\n");
-    scanf("%d", &op);
-    switch (op) {
-        case 1:
-            generate_key();
-            break;
+    system("clear");
+    while (1) {
+        int op;
+        printf("____________________________________________________\n");
+        printf("|                                                  |\n");
+        printf("|           SISTEMA DE CRIPTOGRAFIA RSA            |\n");
+        printf("|__________________________________________________|\n");
+        printf("|              Selecione uma opção:                |\n");
+        printf("|--------------------------------------------------|\n");
+        printf("|                                                  |\n");
+        printf("| 1 | - Gerar a chave                              |\n");
+        printf("| 2 | - Encriptar                                  |\n");
+        printf("| 3 | - Desencriptar                               |\n");
+        printf("| 4 | - Sair                                       |\n");
+        printf("|__________________________________________________|\n");
+        cin >> op;
+        switch (op) {
+            case 1:
+                generate_key();
+                return 0;
+                break;
 
-        case 2:
-            encript();
-            break;
+            case 2:
+                encript();
+                return 0;
+                break;
 
-        case 3:
-            desencript();
-            break;
+            case 3:
+                desencript();
+                return 0;
+                break;
+
+            case 4:
+                return 0;
+                break;
+            default:
+                cout << "Opção inválida!\n";
+                break;
+        }
     }
 }
