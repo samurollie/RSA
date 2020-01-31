@@ -43,7 +43,6 @@ int read_prime() {
     return n;
 }
 
-// Exponenciação modular rápida
 lli exponetiation (lli base, lli exp, lli mod) {
     lli r = 1;
     while (exp) {
@@ -56,6 +55,27 @@ lli exponetiation (lli base, lli exp, lli mod) {
     return r;
 }
 
+int *extendedEuclid (int a, int b){
+	int *dxy = (int*) malloc(sizeof(int) * 3);
+
+	if (b == 0){
+		dxy[0] = a; 
+        dxy[1] = 1; 
+        dxy[2] = 0;
+		return dxy;
+	} else {
+		int t, t2;
+		dxy = extendedEuclid(b, a % b);
+		
+        t = dxy[1];
+		t2 = dxy[2];
+		
+        dxy[1] = dxy[2];
+		dxy[2] = t - a/b * t2;
+		return dxy;
+	}
+}
+
 void generate_key() {
     int p, q, d;
     printf("Digite um número primo: ");
@@ -66,34 +86,44 @@ void generate_key() {
 
     printf ("Escolha um número para o expoente: \n");
     scanf ("%d", &d);
+
+    cout << "Gerando chave, por favor aguarde...\n";
     int x = (p - 1) * (q - 1);
     int e = expoentes(d, x);
     int n = p * q;
 
     FILE *arq;
     arq = fopen("key.txt", "w");
-    
+    if (arq == NULL) {
+        printf("Não foi possivel gerar a chave! (Não há espaço suficiente)\n");
+        return;
+    }
+
     fprintf (arq, "%d %d", e, n);
+    cout << "Chave gerada!\n";
 }
 
 void encript () {
     printf ("Digite a mensagem de texto para criptografia:\n");
     string texto;
-    cin.ignore(); // getchar();
-    getline(cin, texto); //fgets();
+    cin.ignore();
+    getline(cin, texto);
     
-    printf ("Insira o arquivo que contém a chave: \n");
-    char file[100];
-    cin >> file;
-    FILE *arq = fopen(file, "r");
-    if (arq == NULL) {
-        printf ("Arquivo não encontrado.\n");
-        return;
+    FILE *arq;
+    while (1) {
+        printf ("Insira o arquivo que contém a chave: \n");
+        char file[100];
+        cin >> file;
+        arq = fopen(file, "r");
+        if (arq == NULL) {
+            printf ("Arquivo não encontrado!\n");
+        } else {
+            break;
+        }
     }
 
     int e, n;
     fscanf(arq, "%d %d", &e, &n);
-    printf("e = %d, n = %d\n", e, n);
 
     FILE *crip = fopen("cript.txt", "w");
     for (int i = 0; i < texto.size(); i++) {
@@ -113,7 +143,7 @@ void encript () {
 }
 
 void desencript() {
-    int p, q, d;
+    int p, q, a;
     printf("Digite um número primo: ");
     p = read_prime();
 
@@ -121,8 +151,11 @@ void desencript() {
     q = read_prime();
 
     printf ("Escolha um número para o expoente: \n");
-    scanf ("%d", &d);
+    scanf ("%d", &a);
+    int x = (p - 1) * (q - 1);
+    int e = expoentes(a, x);
     int n = p * q;
+    int *d = extendedEuclid(e, x);
 
     printf("Insira o arquivo com a mensagem criptografada: ");
     char file[250];
@@ -137,7 +170,7 @@ void desencript() {
 
     lli num;
     while(fscanf(archive, "%lld", &num) != EOF) {
-        lli result = exponetiation(num, d, n);
+        lli result = exponetiation(num, d[1], n);
         char caracter;
         if (result == 28) {
             caracter = ' ';
