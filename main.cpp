@@ -21,7 +21,7 @@ int mdc (int a, int b) {
 int expoentes(int exp, int x) {
     int maior = 0;
     for (int i = 0; i <= x; i++) {
-        if (x % ((i * exp) - 1) == 0) {
+        if ((i * exp) % x == 1) {
             maior = i;
         }
     }
@@ -169,8 +169,12 @@ void desencript() {
     FILE *desencript = fopen("desencript.txt", "w");
 
     lli num;
+    if (d[1] < 0) {
+        d[1] += x;
+    }
     while(fscanf(archive, "%lld", &num) != EOF) {
         lli result = exponetiation(num, d[1], n);
+        printf("result = %lld\n", result);
         char caracter;
         if (result == 28) {
             caracter = ' ';
