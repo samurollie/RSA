@@ -39,6 +39,7 @@ int read_prime() {
         } else {
             printf ("O número digitado não é primo. Tente novamente.\n");
         }
+        printf("\n");
     } while (flag);
     return n;
 }
@@ -86,7 +87,7 @@ void generate_key() {
 
     printf ("Escolha um número para o expoente: \n");
     scanf ("%d", &d);
-
+    printf("\n");
     cout << "Gerando chave, por favor aguarde...\n";
     int x = (p - 1) * (q - 1);
     int e = expoentes(d, x);
@@ -104,14 +105,14 @@ void generate_key() {
 }
 
 void encript () {
-    printf ("Digite a mensagem de texto para criptografia:\n");
+    printf ("\nDigite a mensagem de texto para criptografia:\n");
     string texto;
     cin.ignore();
     getline(cin, texto);
     
     FILE *arq;
     while (1) {
-        printf ("Insira o arquivo que contém a chave: \n");
+        printf ("\nInsira o arquivo que contém a chave: \n");
         char file[100];
         cin >> file;
         arq = fopen(file, "r");
@@ -144,20 +145,20 @@ void encript () {
 
 void desencript() {
     int p, q, a;
-    printf("Digite um número primo: ");
+    printf("\nDigite um número primo: ");
     p = read_prime();
 
     printf("Digite outro número primo: ");
     q = read_prime();
 
-    printf ("Escolha um número para o expoente: \n");
+    printf ("Escolha um número para o expoente: ");
     scanf ("%d", &a);
     int x = (p - 1) * (q - 1);
     int e = expoentes(a, x);
     int n = p * q;
     int *d = extendedEuclid(e, x);
 
-    printf("Insira o arquivo com a mensagem criptografada: ");
+    printf("\nInsira o arquivo com a mensagem criptografada: ");
     char file[250];
     scanf("%s", file); 
 
