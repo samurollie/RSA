@@ -8,13 +8,13 @@ typedef long long int lli;
 /** @param n:   O número que se deseja saber se é primo.
  * @return:     Se o número é primo ou não. 
 */
-int is_prime (int n);
+lli is_prime (lli n);
 
 /** @param */
-int mdc (int a, int b);
-int expoentes(int exp, int x);
-int read_prime();
+lli mdc (lli a, lli b);
+lli expoentes(lli exp, lli x);
+lli read_prime();
 lli exponetiation (lli base, lli exp, lli mod);
-int *extendedEuclid (int a, int b);
+lli *extendedEuclid (lli a, lli b);
 
 #endif

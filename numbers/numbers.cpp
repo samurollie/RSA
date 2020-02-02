@@ -1,9 +1,9 @@
 
 #include "numbers.h"
 
-int is_prime (int n) { 
+lli is_prime (lli n) { 
     if (n == 0 || n == 1) return 0;
-    for (int i = 2; i <= sqrt(n); i++) {
+    for (lli i = 2; i <= sqrt(n); i++) {
         if (!(n % i)) {
             return 0;
         }
@@ -11,13 +11,13 @@ int is_prime (int n) {
     return 1;
 }
 
-int mdc (int a, int b) {
+lli mdc (lli a, lli b) {
     return (b == 0) ? a : mdc(b, a % b);
 }
 
-int expoentes(int exp, int x) {
-    int maior = 0;
-    for (int i = 0; i <= x; i++) {
+lli expoentes(lli exp, lli x) {
+    lli maior = 0; // sempre pegamos o maior primo entre os dois.
+    for (lli i = 2; i <= x; i++) {
         if ((i * exp) % x == 1) {
             maior = i;
         }
@@ -25,16 +25,16 @@ int expoentes(int exp, int x) {
     return maior;
 }
 
-int read_prime() {   
-    int flag = 1;
-    int n;
+lli read_prime() {   
+    lli flag = 1;
+    lli n;
     do {
-        scanf("%d", &n);
+        scanf("%lld", &n);
         if (is_prime(n) == 1) {
-            printf ("O número escolhido é primo.\n");
+            printf ("O número escolhido é primo.\n\n");
             flag = 0;
         } else {
-            printf ("O número digitado não é primo. Tente novamente.\n");
+            printf ("O número digitado não é primo. Tente novamente.\n\n");
         }
     } while (flag);
     return n;
@@ -52,8 +52,8 @@ lli exponetiation (lli base, lli exp, lli mod) {
     return r;
 }
 
-int *extendedEuclid (int a, int b) {
-	int *dxy = (int*) malloc(sizeof(int) * 3);
+lli *extendedEuclid (lli a, lli b) {
+	lli *dxy = (lli*) malloc(sizeof(lli) * 3);
 
 	if (b == 0){
 		dxy[0] = a; 
@@ -61,7 +61,7 @@ int *extendedEuclid (int a, int b) {
         dxy[2] = 0;
 		return dxy;
 	} else {
-		int t, t2;
+		lli t, t2;
 		dxy = extendedEuclid(b, a % b);
 		
         t = dxy[1];
