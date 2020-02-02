@@ -120,8 +120,7 @@ int main() {
         printf("|                                                  |\n");
         printf("|           SISTEMA DE CRIPTOGRAFIA RSA            |\n");
         printf("|__________________________________________________|\n");
-        printf("|              Selecione uma opção:                |\n");
-        printf("|--------------------------------------------------|\n");
+        printf("|Selecione uma opção:                              |\n");
         printf("|                                                  |\n");
         printf("| 1 | - Gerar a chave                              |\n");
         printf("| 2 | - Encriptar                                  |\n");
