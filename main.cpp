@@ -1,7 +1,9 @@
 #include <bits/stdc++.h>
+#include "numbers/numbers.h"
 
 using namespace std;
 
+<<<<<<< HEAD
 typedef long long int lli;
 
 int is_prime (int n) { // Verifica se um numero e primo
@@ -77,6 +79,8 @@ int *extendedEuclid (int a, int b){
 	}
 }
 
+=======
+>>>>>>> c1b666a1fb44bf6b486a82961735ee20d903c8b6
 void generate_key() {
     int p, q, d;
     printf("Digite um número primo: ");
@@ -170,8 +174,12 @@ void desencript() {
     FILE *desencript = fopen("desencript.txt", "w");
 
     lli num;
+    if (d[1] < 0) {
+        d[1] += x;
+    }
     while(fscanf(archive, "%lld", &num) != EOF) {
         lli result = exponetiation(num, d[1], n);
+        printf("result = %lld\n", result);
         char caracter;
         if (result == 28) {
             caracter = ' ';
