@@ -27,10 +27,10 @@ lli read_prime();
  * */
 lli exponetiation (lli base, lli exp, lli mod); //This is the end?????
 
-/** @param  a:  é o numero relativamente primo a b.  
- *  @param  b:  é (p - 1) * (q - 1); 
- *  @return:    Resultado final do algoritmo de Euclides extendido;
-  */
+/** @param  a:  É o número relativamente primo a b.  
+ *  @param  b:  É (p - 1) * (q - 1); 
+ *  @return:    O inverso de a mod b;
+ * */
 lli *extendedEuclid (lli a, lli b);
 
 #endif
