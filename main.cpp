@@ -20,19 +20,28 @@ FILE* get_file(string msg) {
 }
 
 void generate_key() {
-    lli p, q, d;
-    printf("Digite um número primo: ");
+    lli p, q, e;
+    printf("Digite um número primo (p): ");
     p = read_prime();
 
-    printf("Digite outro número primo: ");
+    printf("Digite um número primo diferente do anterior (q): ");
     q = read_prime();
 
-    printf ("Escolha um número para o expoente: \n");
-    scanf ("%lld", &d);
-
-    cout << "\nGerando chave, por favor aguarde...\n";
     lli x = (p - 1) * (q - 1);
-    lli e = expoentes(d, x);
+    printf("φ(n) = (p - 1) * (q - 1)\n");
+    printf("φ(n) = %lld\n", x);
+    
+    while (1) {
+        printf("Escolha um valor para 'e' dentro do seguinte intervalo: (1 < e < %lld)\n", x);
+        cin >> e;
+        if(e > 1 && e < x && mdc(e, x) == 1) {
+            break;
+        } else {
+            cout << "Valor de 'e' invalido\n";
+        }
+    }
+    
+    cout << "\nGerando chave, por favor aguarde...\n"; 
     lli n = p * q;
 
     FILE *arq;
@@ -79,6 +88,7 @@ void encript () {
                 
                 fprintf(crip, "%lld ", x);
             }
+            cout << "Mensagem criptografada!\n\n";
             return;
         } else if (op == 2) {
             printf ("\nDigite a mensagem de texto para criptografar:\n");
@@ -104,7 +114,7 @@ void encript () {
                 
                 fprintf(crip, "%lld ", x);
             }
-            cout << "Mensagem criptograda!\n\n";
+            cout << "Mensagem criptografada!\n\n";
             return;
         } else {
             printf("Opção inválida!\n");
@@ -113,28 +123,34 @@ void encript () {
 }
 
 void desencript() {
-    lli p, q, a;
-    printf("\nDigite um número primo: ");
+    lli p, q, e;
+    printf("Digite um número primo (p): ");
     p = read_prime();
 
-    printf("Digite outro número primo: ");
+    printf("Digite um número primo diferente do anterior (q): ");
     q = read_prime();
 
-    printf ("Escolha um número para o expoente: ");
-    scanf ("%lld", &a);
     lli x = (p - 1) * (q - 1);
-    lli e = expoentes(a, x);
-    lli n = p * q;
+    printf("φ(n) = (p - 1) * (q - 1)\n");
+    printf("φ(n) = %lld\n", x);
+    
+    while (1) { // Loop infinito
+        printf("Escolha um valor para 'e' dentro do seguinte intervalo: (1 < e < %lld)\n", x);
+        cin >> e;
+        if(e > 1 && e < x && mdc(e, x) == 1) {
+            break;
+        } else {
+            cout << "Valor de 'e' invalido!\n";
+        }
+    }
     lli *d = extendedEuclid(e, x);
+    lli n = p * q;
 
-    printf("\nInsira o arquivo com a mensagem criptografada: ");
+    printf("");
     char file[250];
     scanf("%s", file); 
 
-    FILE *archive = fopen(file, "r");
-    if (archive == NULL) {
-        cout << "Arquivo não encontrado!\n";
-    }
+    FILE *archive = get_file("\nInsira o arquivo com a mensagem criptografada:\n");
 
     FILE *desencript = fopen("desencript.txt", "w");
 
@@ -146,7 +162,6 @@ void desencript() {
     cout << "\nDescriptando o texto...\n";
     while(fscanf(archive, "%lld", &num) != EOF) {
         lli result = exponetiation(num, d[1], n);
-        // printf("result = %lld\n", result);
         char caracter;
         if (result == 28) {
             caracter = ' ';

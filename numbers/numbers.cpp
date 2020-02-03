@@ -61,7 +61,7 @@ lli *extendedEuclid (lli a, lli b) {
         dxy[2] = 0;
 		return dxy;
 	} else {
-		lli t, t2;
+		lli t, t2; // variaveis auxiliar.
 		dxy = extendedEuclid(b, a % b);
 		
         t = dxy[1];
