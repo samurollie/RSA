@@ -146,10 +146,6 @@ void desencript() {
     lli *d = extendedEuclid(e, x);
     lli n = p * q;
 
-    printf("");
-    char file[250];
-    scanf("%s", file); 
-
     FILE *archive = get_file("\nInsira o arquivo com a mensagem criptografada:\n");
 
     FILE *desencript = fopen("desencript.txt", "w");
