@@ -22,14 +22,14 @@ lli read_prime();
 
 /** @param  base:   Base da potenciação.
  *  @param  exp:    Expoente da potenciação.
- *  @param  mod:    O número que se deseja calcular o mod. / < pessimo// pessimo nada
+ *  @param  mod:    O número que se deseja calcular o mod.
  *  @return:        Resultado final da exponenciação modular rápida.
  * */
-lli exponetiation (lli base, lli exp, lli mod); //This is the end?????
+lli exponetiation (lli base, lli exp, lli mod);
 
-/** @param  a:  É o número relativamente primo a b.  
- *  @param  b:  É (p - 1) * (q - 1); 
- *  @return:    O inverso de a mod b;
+/** @param  a:  Um número relativamente primo a b.  
+ *  @param  b:  O número que se deseja calcular o mod.
+ *  @return:    O inverso de a mod b.
  * */
 lli *extendedEuclid (lli a, lli b);
 
